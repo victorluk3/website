@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-app-bar fixed>
+        <img src="chabela.png" width="48" />  
+        <div v-show="platillos"><h3>Platillos</h3></div>
+        <div v-show="combinaciones"><h3>Combinaciones</h3></div>
+        <div v-show="bebidas"><h3>Bebidas</h3></div>
+        <div v-show="postres"><h3>Postres</h3></div>
+      </v-app-bar>
+      <v-main>
+        <!-- <v-toolbar fixed>
+           
+        </v-toolbar> -->
+
+        <v-container class="mt-15 mb-15">
+
+          <v-row no-gutters v-show="platillos">
+            <v-col
+              v-for="item in platillos_arr"
+              :key="item.id"
+              cols="12"
+              sm="4"
+            >
+            <v-card class="mx-auto mt-2" max-width="344">
+              <v-img
+                :src="item.image"
+                height="200px"
+              ></v-img>
+          
+              <v-card-title>
+                {{item.name}}
+              </v-card-title>
+          
+              <v-card-subtitle>
+                {{item.description}}
+              </v-card-subtitle>
+          
+              <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-chip color="orange">{{item.price}}</v-chip>
+              </v-card-actions>
+            </v-card>
+            </v-col>
+          </v-row>
+
+          <v-row no-gutters v-show="combinaciones">
+            <v-col
+              v-for="item in combinaciones_arr"
+              :key="item.id"
+              cols="12"
+              sm="4"
+            >
+            <v-card class="mx-auto mt-2" max-width="344">
+              <v-img
+                :src="item.image"
+                height="200px"
+              ></v-img>
+          
+              <v-card-title>
+                {{item.name}}
+              </v-card-title>
+          
+              <v-card-subtitle>
+                {{item.description}}
+              </v-card-subtitle>
+          
+              <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-chip color="orange">{{item.price}}</v-chip>
+              </v-card-actions>
+            </v-card>
+            </v-col>
+          </v-row>
+
+          <v-row no-gutters v-show="bebidas">
+            <v-col
+              v-for="item in bebidas_arr"
+              :key="item.id"
+              cols="12"
+              sm="4"
+            >
+            <v-card class="mx-auto mt-2" max-width="344">
+              <v-img
+                :src="item.image"
+                height="200px"
+              ></v-img>
+          
+              <v-card-title>
+                {{item.name}}
+              </v-card-title>
+          
+              <v-card-subtitle>
+                {{item.description}}
+              </v-card-subtitle>
+          
+              <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-chip color="orange">{{item.price}}</v-chip>
+              </v-card-actions>
+            </v-card>
+            </v-col>
+          </v-row>
+ 
+          <v-row no-gutters v-show="postres">
+            <v-col
+              v-for="item in postres_arr"
+              :key="item.id"
+              cols="12"
+              sm="4"
+            >
+            <v-card class="mx-auto mt-2" max-width="344">
+              <v-img
+                :src="item.image"
+                height="200px"
+              ></v-img>
+          
+              <v-card-title>
+                {{item.name}}
+              </v-card-title>
+          
+              <v-card-subtitle>
+                {{item.description}}
+              </v-card-subtitle>
+          
+              <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-chip color="orange">{{item.price}}</v-chip>
+              </v-card-actions>
+            </v-card>
+            </v-col>
+          </v-row>
+
+            
+        </v-container>
+
+
+        <v-bottom-navigation
+            color="primary"
+            fixed
+        >
+        <v-btn @click="selected('platillos')">
+          <span>Platillos</span>
+    
+          <!-- <v-icon>mdi-history</v-icon> -->
+        </v-btn>
+    
+        <v-btn @click="selected('combinaciones')">
+          <span>Combinaciones</span>
+    
+          <!-- <v-icon>mdi-heart</v-icon> -->
+        </v-btn>
+    
+        <v-btn @click="selected('bebidas')">
+          <span>Bebidas</span>
+    
+          <!-- <v-icon>mdi-map-marker</v-icon> -->
+        </v-btn>
+        <v-btn @click="selected('postres')">
+            <span>Postres</span>
+      
+            <!-- <v-icon>mdi-map-marker</v-icon> -->
+          </v-btn>
+      </v-bottom-navigation>
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data(){
+        return {
+            platillos: true,
+            combinaciones: false,
+            bebidas: false,
+            postres: false,
+            platillos_arr: [
+              {
+                name: 'Arrachera',
+                description: 'Acompañada de 2 quesadillas, cebolla al grill, guacamole y gallina pinta',
+                image: 'menu/arrachera.jpg',
+                price: '$180'
+              },
+              {
+                name: 'Burritos',
+                description: 'De tortilla de harina o maiz recien hecha, rellenos con el guiso de tu elección',
+                image: '/menu/burritos.jpg',
+                price: '$15'
+              },
+              {
+                name: 'Sincronizada',
+                description: 'Sincronizada de cochinita / Ensalada / Frijoles',
+                image: 'menu/sincronizada.jpg',
+                price: '$34'
+              },
+              {
+                name: 'Machaca a la mexicana',
+                description: 'Acompañada de frijol, asadera fresca y 3 tortillas artesanales',
+                image: 'menu/sincronizada.jpg',
+                price: '$75'
+              }
+            ],
+            combinaciones_arr:[
+              {
+                name: 'Combinación del rancho',
+                description: '2 huevos estrellados o revueltos, porción de guisado a elegir, asadera, frijoles, totopos y 3 tortillas artesanales',
+                image: 'menu/huevos fritos.jpg',
+                price: '$85'
+              },
+              {
+                name: 'Combinación Guamúchil',
+                description: 'Machaca a la mexicana, 1 tamal de elote, frijol, asadera y 3 tortillas artesanales',
+                image: 'menu/guamuchil.jpg',
+                price: '$100'
+              }
+            ],
+            bebidas_arr: [],
+            postres_arr: []
+        }
+      },
+      methods: {
+          selected(valor){
+            this.platillos = false;
+            this.combinaciones = false;
+            this.bebidas = false;
+            this.postres = false;
+
+            this[valor] = true;
+          }
+      }
+    })
+  </script>
+</body>
+</html>
